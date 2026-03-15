@@ -1,0 +1,49 @@
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: leaderboard-ranking-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  api:
+    build: ./python
+    container_name: leaderboard-ranking-api
+    ports:
+      - "8000:8000"
+    environment:
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  api-go:
+    build: ./go
+    container_name: leaderboard-ranking-api-go
+    ports:
+      - "8080:8080"
+    environment:
+      REDIS_URL: redis://redis:6379
+      PORT: "8080"
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  api-inmem:
+    build: ./go-fenwick-based-in-memory
+    container_name: leaderboard-ranking-api-inmem
+    ports:
+      - "8081:8081"
+    restart: unless-stopped
+
+volumes:
+  redis-data:

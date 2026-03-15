@@ -1,0 +1,55 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+env/
+.env/
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Go
+*.exe
+*.exe~
+*.dll
+*.test
+*.out
+vendor/
+
+# Docker
+.docker/
+
+# Env and secrets
+.env
+.env.local
+.env.*.local
+*.pem
+
+# Logs and temp
+*.log
+tmp/
+temp/
+.cache/
+
+# Coverage and test artifacts
+htmlcov/
+.coverage
+.coverage.*
+.tox/
+.nox/

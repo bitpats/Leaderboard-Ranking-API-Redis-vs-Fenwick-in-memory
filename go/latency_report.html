@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Latency Report</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 2rem; background: #1a1a1a; color: #e0e0e0; }
+    h1 { color: #fff; margin-bottom: 0.5rem; }
+    .meta { color: #888; margin-bottom: 1.5rem; font-size: 0.9rem; }
+    table { border-collapse: collapse; width: 100%; max-width: 1200px; }
+    th, td { border: 1px solid #444; padding: 0.6rem 0.8rem; text-align: left; }
+    th { background: #2d2d2d; color: #fff; font-weight: 600; }
+    tr:nth-child(even) { background: #252525; }
+    tr:hover { background: #333; }
+    td:nth-child(n+2) { text-align: right; font-variant-numeric: tabular-nums; }
+    td:first-child { max-width: 400px; word-break: break-all; }
+  </style>
+</head>
+<body>
+  <h1>API Latency Report</h1>
+  <p class="meta">BASE_URL=http://localhost:8080 | K_RPS=50 | RESTORE_N=10000 | DURATION=10s</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Endpoint</th>
+        <th>Count</th>
+        <th>Min (ms)</th>
+        <th>Max (ms)</th>
+        <th>Avg (ms)</th>
+        <th>Median (ms)</th>
+        <th>p50 (ms)</th>
+        <th>p90 (ms)</th>
+        <th>p95 (ms)</th>
+        <th>p99 (ms)</th>
+        <th>p99.9 (ms)</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr><td>GET /ping</td><td>500</td><td>1.54</td><td>46.03</td><td>5.37</td><td>4.65</td><td>4.65</td><td>7.87</td><td>10.20</td><td>24.44</td><td>40.80</td></tr>
+    <tr><td>GET /user/{id}/score</td><td>500</td><td>1.36</td><td>304.07</td><td>12.18</td><td>4.84</td><td>4.84</td><td>11.95</td><td>25.48</td><td>250.64</td><td>300.65</td></tr>
+    <tr><td>GET /user/{id}/rank</td><td>500</td><td>1.57</td><td>694.06</td><td>32.84</td><td>4.64</td><td>4.64</td><td>16.06</td><td>290.49</td><td>566.13</td><td>680.83</td></tr>
+    <tr><td>GET /score/{score}/count</td><td>500</td><td>1.55</td><td>51.11</td><td>5.18</td><td>4.62</td><td>4.62</td><td>7.64</td><td>9.40</td><td>18.19</td><td>40.85</td></tr>
+    <tr><td>GET /leaderboard</td><td>500</td><td>2.23</td><td>34.30</td><td>5.83</td><td>5.48</td><td>5.48</td><td>8.25</td><td>9.83</td><td>15.98</td><td>33.52</td></tr>
+    <tr><td>GET /leaderboard?min_rank=&amp;max_rank= (dynamic)</td><td>500</td><td>1.88</td><td>67.53</td><td>7.97</td><td>6.67</td><td>6.67</td><td>14.03</td><td>16.65</td><td>25.01</td><td>59.18</td></tr>
+    <tr><td>GET /leaderboard?min_score=&amp;max_score= (dynamic)</td><td>500</td><td>1.80</td><td>327.05</td><td>15.52</td><td>6.98</td><td>6.98</td><td>17.51</td><td>55.91</td><td>206.33</td><td>307.84</td></tr>
+    <tr><td>GET /leaderboard/all</td><td>500</td><td>11.51</td><td>62.29</td><td>14.55</td><td>13.99</td><td>13.99</td><td>16.01</td><td>17.11</td><td>23.25</td><td>58.49</td></tr>
+    </tbody>
+  </table>
+</body>
+</html>
